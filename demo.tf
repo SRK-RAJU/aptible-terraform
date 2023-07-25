@@ -1,21 +1,6 @@
 # This deploys our Aptible Demo App
 # https://www.aptible.com/documentation/deploy/tutorials/deploy-demo-app.html
 
-
-terraform {
-  required_providers {
-    aptible = {
-      source = "aptible/aptible"
-      version = "0.7.3"
-    }
-  }
-}
-provider "aptible" {
-region="ap-south-1"
-  # Configuration options
-}
-
-
 # TODO: Enter your account handle here
 data "aptible_environment" "demo" {
   handle = "env-dev-test"

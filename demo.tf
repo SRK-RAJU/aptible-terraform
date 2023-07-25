@@ -1,5 +1,8 @@
 # This deploys our Aptible Demo App
 # https://www.aptible.com/documentation/deploy/tutorials/deploy-demo-app.html
+provider "aptible" {
+  # Configuration options
+}
 
 terraform {
   required_providers {

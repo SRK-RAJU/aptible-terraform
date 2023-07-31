@@ -1,9 +1,16 @@
 # This deploys our Aptible Demo App
+#  terraform import aptible_environment.example <ID>
 # https://www.aptible.com/documentation/deploy/tutorials/deploy-demo-app.html
 
 # TODO: Enter your account handle here
+
 data "aptible_environment" "env" {
-  handle = "env-qa"
+  handle = "env-test"
+}
+resource "aptible_environment" "env-test" {
+    org_id = "aa25fb77-4eef-4b83-818c-c35395d7ee86"
+    stack_id = "348"
+    handle = "env-test"
 }
 
 resource "aptible_app" "env-test" {

@@ -4,9 +4,9 @@
 
 # TODO: Enter your account handle here
 
-data "aptible_environment" "env" {
-  handle = "env-test"
-}
+#data "aptible_environment" "env" {
+#  handle = "env-test"
+#}
 resource "aptible_environment" "env-test" {
     org_id = "aa25fb77-4eef-4b83-818c-c35395d7ee86"
     stack_id = "348"
@@ -14,7 +14,7 @@ resource "aptible_environment" "env-test" {
 }
 
 resource "aptible_app" "env-test" {
-  env_id = data.aptible_environment.env.env_id
+  env_id = aptible_environment.env-test.env_id
   handle = "env-test"
   config = {
     "APTIBLE_DOCKER_IMAGE" = "quay.io/aptible/deploy-demo-app"
@@ -42,7 +42,7 @@ resource "aptible_app" "env-test" {
 }
 
 resource "aptible_database" "env-pg" {
-  env_id         = data.aptible_environment.env.env_id
+  env_id         = aptible_environment.env-test.env_id
   handle         = "env-pg"
   database_type  = "postgresql"
   container_size = 512
@@ -50,7 +50,7 @@ resource "aptible_database" "env-pg" {
 }
 
 resource "aptible_database" "env-redis" {
-  env_id         = data.aptible_environment.env.env_id
+  env_id         = aptible_environment.env-test.env_id
   handle         = "env-redis"
   database_type  = "redis"
   container_size = 512
@@ -58,7 +58,7 @@ resource "aptible_database" "env-redis" {
 }
 
 resource "aptible_endpoint" "env-app-public-endpoint" {
-  env_id         = data.aptible_environment.env.env_id
+  env_id         = aptible_environment.env-test.env_id
   resource_type  = "app"
   process_type   = "web"
   resource_id    = aptible_app.env-test.app_id

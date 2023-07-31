@@ -12,7 +12,7 @@ terraform {
   required_providers {
     aptible = {
       source = "aptible/aptible"
-       version = "0.7"
+       version = "0.7.3"
     }
   }
 }

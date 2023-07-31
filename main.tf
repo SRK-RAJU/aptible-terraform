@@ -1,0 +1,93 @@
+data "aptible_environment" "techco-test-environment" {
+    handle = "techco-test-environment"
+}
+data "aptible_app" "techo-app" {
+    env_id = data.aptible_environment.techco-test-environment.env_id
+    handle = "techo-app"
+}
+resource "aptible_environment" "techco-test-environment" {
+    org_id = "some-uuid-that-represents-your-org"
+    stack_id = "your_stack_id"
+    handle = "techco-test-environment"
+}
+data "aptible_app" "APP" {
+    handle = "APP_HANDLE"
+}
+resource "aptible_app" "APP" {
+    env_id = ENVIRONMENT_ID
+    handle = "APP_HANDLE"
+    config = {
+        "KEY" = "value"
+    }
+}
+resource "aptible_app" "APP" {
+    env_id = ENVIRONMENT_ID
+    handle = "APP_HANDLE"
+    config = {
+        "KEY" = "value"
+        "APTIBLE_DOCKER_IMAGE" = "quay.io/aptible/deploy-demo-app"
+        "APTIBLE_PRIVATE_REGISTRY_USERNAME" = "registry_username"
+        "APTIBLE_PRIVATE_REGISTRY_PASSWORD" = "registry_password"
+    }
+}
+resource "aptible_app" "APP" {
+    env_id = ENVIRONMENT_ID
+    handle = "APP_HANDLE"
+    service {
+        process_type = "SERVICE_NAME1"
+        container_count = 1
+        container_memory_limit = 1024
+    }
+    service {
+        process_type = "SERVICE_NAME2"
+        container_count = 2
+        container_memory_limit = 2048
+    }
+}
+resource "aptible_endpoint" "EXAMPLE" {
+    env_id = ENVIONMENT_ID
+    process_type = "SERVICE_NAME"
+    resource_id = aptible_app.APP.app_id
+    default_domain = true
+    endpoint_type = "https"
+    internal = false
+    platform = "alb"
+    container_port = 5000
+}
+resource "aptible_database" "DATABASE" {
+    env_id = ENVIRONMENT_ID
+    handle = "DATABASE_HANDLE"
+    database_type = "redis"
+    container_size = 512
+    disk_size = 10
+}
+resource "aptible_replica" "REPLICA_HANDLE" {
+    env_id = ENVIRONMENT_ID
+    primary_database_id = aptible_database.DATABASE.database_id
+    handle = "REPLICA_HANDLE"
+    disk_size = 30
+}
+data "aptible_stack" "test-stack" {
+    name = "test-stack"
+}
+resource "aptible_environment" "test-env" {
+    stack_id = data.aptible_stack.test-stack.stack_id
+    org_id = data.aptible_stack.test-stack.org_id
+    name = "test-env"
+}
+data "aptible_environment" "techco-test-environment" {
+    handle = "techco-test-environment"
+}
+resource "aptible_app" "techo-app" {
+    env_id = data.aptible_environment.techco-test-environment.env_id
+    handle = "techo-app"
+}
+
+data "aptible_stack" "test-stack" {
+    name = "test-stack"
+}
+resource "aptible_environment" "test-env" {
+    stack_id = data.aptible_stack.test-stack.stack_id
+    org_id = data.aptible_stack.test-stack.org_id
+    name = "test-env"
+}

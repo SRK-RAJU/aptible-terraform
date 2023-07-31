@@ -1,3 +1,6 @@
+
+## organization org_id will be found in https://dashboard.aptible.com/organizations/aa25fb77-4eef-4b83-818c-c35395d7ee86/members
+## stack_id will be found in https://dashboard.aptible.com/stack/348/accounts
 data "aptible_environment" "techco-test-environment" {
     handle = "techco-test-environment"
 }
@@ -6,8 +9,8 @@ data "aptible_app" "techo-app" {
     handle = "techo-app"
 }
 resource "aptible_environment" "techco-test-environment" {
-    org_id = "some-uuid-that-represents-your-org"
-    stack_id = "your_stack_id"
+    org_id = "aa25fb77-4eef-4b83-818c-c35395d7ee86"
+    stack_id = "348"
     handle = "techco-test-environment"
 }
 data "aptible_app" "APP" {

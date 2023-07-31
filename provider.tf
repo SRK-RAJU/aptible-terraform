@@ -7,5 +7,5 @@ terraform {
   }
 }
 
-provider aptible {
+provider "aptible" {
 }

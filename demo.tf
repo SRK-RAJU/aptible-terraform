@@ -3,7 +3,7 @@
 
 # TODO: Enter your account handle here
 data "aptible_environment" "env" {
-  handle = "env-test"
+  handle = "env-qa"
 }
 
 resource "aptible_app" "env-test" {

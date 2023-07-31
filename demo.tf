@@ -11,7 +11,7 @@
 
 resource "aptible_environment" "env-test" {
     org_id = "aa25fb77-4eef-4b83-818c-c35395d7ee86"
-    stack_id = "348"
+    stack_id = "1"
     handle = "env-test"
 }
 

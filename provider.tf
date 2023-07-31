@@ -8,5 +8,4 @@ terraform {
 }
 
 provider "aptible" {
-  region="ap-south-1"
 }
